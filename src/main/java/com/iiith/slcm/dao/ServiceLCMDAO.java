@@ -1,14 +1,13 @@
 package com.iiith.slcm.dao;
 
-import javax.persistence.EntityManagerFactory;
-
+import com.iiith.slcm.dataentities.PendingRequests;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.iiith.slcm.dataentities.PendingRequests;
+import javax.persistence.EntityManagerFactory;
 
 @Component
 public class ServiceLCMDAO {
@@ -27,5 +26,20 @@ public class ServiceLCMDAO {
         Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
         PendingRequests pendingRequests = session.get(PendingRequests.class, serviceId);
         return pendingRequests;
+    }
+
+    public void updateServiceInfo(PendingRequests pendingRequests) {
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Transaction tx = session.beginTransaction();
+        session.update(pendingRequests);
+        tx.commit();
+    }
+
+    public void deleteServiceInfo(String serviceId) {
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Transaction tx = session.beginTransaction();
+        PendingRequests pendingRequests = session.get(PendingRequests.class, serviceId);
+        session.delete(pendingRequests);
+        tx.commit();
     }
 }

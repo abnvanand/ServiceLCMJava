@@ -1,5 +1,7 @@
 package com.iiith.slcm.controller;
 
+import com.iiith.slcm.businessentities.DeploymentResponse;
+import com.iiith.slcm.businessentities.ServerInfo;
 import com.iiith.slcm.businessentities.ServiceSchema;
 import com.iiith.slcm.service.ServiceLCM;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,21 @@ public class ServiceSchemaController {
     @RequestMapping(value = "/service/start", method = RequestMethod.POST)
     public void startService(@RequestBody ServiceSchema serviceSchema) {
         serviceLCM.startService(serviceSchema);
+    }
 
+    @RequestMapping(value = "/service/update", method = RequestMethod.POST)
+    public void allotedServer(@RequestBody ServerInfo serverInfo) {
+        serviceLCM.updateServiceWithIpPort(serverInfo);
+    }
+
+    @RequestMapping(value = "/service/deploymentStatus", method = RequestMethod.POST)
+    public void deploymentStatus(@RequestBody DeploymentResponse deploymentResponse) {
+        if ("success".equalsIgnoreCase(deploymentResponse.getStatus())) {
+            // DELTE service info
+            serviceLCM.deleteServiceInfo(deploymentResponse);
+        } else {
+            // TODO:
+        }
     }
 
 //    @RequestMapping(value = "/topics/add", method = RequestMethod.POST)

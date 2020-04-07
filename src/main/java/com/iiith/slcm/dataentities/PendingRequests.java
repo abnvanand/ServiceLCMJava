@@ -6,23 +6,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"PendingRequest\"")
+@Table(name = "\"PendingRequests\"")
 public class PendingRequests {
     @Id
     @Column(name = "\"serviceId\"")
     private String serviceId;
-    
+
     @Column(name = "\"serviceName\"")
     private String serviceName;
-    
+
     @Column(name = "\"userId\"")
     private String userId;
-    
+
     @Column(name = "\"serverIp\"")
     private String serverIp;
-    
-    @Column(name = "\"serverPort\"")
-    private String serverPort;
+
+    @Column(name = "\"sshPort\"")
+    private String sshPort;
 
     public PendingRequests() {
     }
@@ -36,7 +36,7 @@ public class PendingRequests {
         this.serviceName = serviceName;
         this.userId = userId;
         this.serverIp = serverIp;
-        this.serverPort = serverPort;
+        this.sshPort = serverPort;
     }
 
     public String getServiceId() {
@@ -71,11 +71,11 @@ public class PendingRequests {
         this.serverIp = serverIp;
     }
 
-    public String getServerPort() {
-        return serverPort;
+    public String getSshPort() {
+        return sshPort;
     }
 
-    public void setServerPort(String sshPort) {
-        this.serverPort = sshPort;
+    public void setSshPort(String sshPort) {
+        this.sshPort = sshPort;
     }
 }
