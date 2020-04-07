@@ -17,7 +17,7 @@ public class ServiceLCM {
         pendingRequests.setServiceId(serviceSchema.getServiceId());
         pendingRequests.setServiceName(serviceSchema.getServiceName());
         pendingRequests.setServerIp("Someip");
-        pendingRequests.setSshPort("some port");
+        pendingRequests.setServerPort("some port");
 
         serviceLCMDAO.addServiceInfo(pendingRequests);
 //        serviceLCMDAO.getServiceInfo(serviceSchema.getServiceId());

@@ -1,22 +1,28 @@
 package com.iiith.slcm.dataentities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-//@Table(name = "pendingrequests")
+@Table(name = "\"PendingRequest\"")
 public class PendingRequests {
     @Id
-//    @Column(name = "\"serviceId\"")
+    @Column(name = "\"serviceId\"")
     private String serviceId;
-    //    @Column(name = "\"serviceName\"")
+    
+    @Column(name = "\"serviceName\"")
     private String serviceName;
-    //    @Column(name = "\"userId\"")
+    
+    @Column(name = "\"userId\"")
     private String userId;
-    //    @Column(name = "\"serverIp\"")
+    
+    @Column(name = "\"serverIp\"")
     private String serverIp;
-    //    @Column(name = "\"sshPort\"")
-    private String sshPort;
+    
+    @Column(name = "\"serverPort\"")
+    private String serverPort;
 
     public PendingRequests() {
     }
@@ -24,13 +30,13 @@ public class PendingRequests {
 
     public PendingRequests(String serviceId, String serviceName,
                            String userId, String serverIp,
-                           String sshPort) {
+                           String serverPort) {
         super();
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.userId = userId;
         this.serverIp = serverIp;
-        this.sshPort = sshPort;
+        this.serverPort = serverPort;
     }
 
     public String getServiceId() {
@@ -65,11 +71,11 @@ public class PendingRequests {
         this.serverIp = serverIp;
     }
 
-    public String getSshPort() {
-        return sshPort;
+    public String getServerPort() {
+        return serverPort;
     }
 
-    public void setSshPort(String sshPort) {
-        this.sshPort = sshPort;
+    public void setServerPort(String sshPort) {
+        this.serverPort = sshPort;
     }
 }
