@@ -3,12 +3,12 @@ package com.iiith.slcm.controller;
 import com.iiith.slcm.businessentities.DeploymentResponse;
 import com.iiith.slcm.businessentities.ServerInfo;
 import com.iiith.slcm.businessentities.ServiceSchema;
+import com.iiith.slcm.dataentities.Topology;
 import com.iiith.slcm.service.ServiceLCM;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -52,6 +52,13 @@ public class ServiceSchemaController {
             // TODO:
         }
     }
+
+
+    @RequestMapping(value = "/service/topology/{userId}", method = RequestMethod.GET)
+    public List<Topology> getTopology(@PathVariable("userId") String userId) {
+        return serviceLCM.getTopologyForUser(userId);
+    }
+
 
 //    @RequestMapping(value = "/topics/add", method = RequestMethod.POST)
 //    public void addTopic(@RequestBody Service topic) {

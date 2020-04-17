@@ -18,6 +18,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 @org.springframework.stereotype.Service
 public class ServiceLCM {
@@ -203,5 +204,9 @@ public class ServiceLCM {
 
         sendRequestToServerLCM(URL_ALLOCATE_SERVER);
         serviceLCMDAO.addServiceInfo(pendingRequests);
+    }
+
+    public List<Topology> getTopologyForUser(String userId) {
+        return topologyDAO.getTopologyForUser(userId);
     }
 }
