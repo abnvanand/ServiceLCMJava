@@ -1,28 +1,39 @@
 package com.iiith.slcm.businessentities;
 
 public class ServerInfo {
-    String serviceId;
-    String serverIp;
+    String result;
+    String serviceid;
+    String serverip;
     String sshPort;
+    String machineusername;
+    String password;
 
 
     public ServerInfo() {
     }
 
-    public String getServiceId() {
-        return serviceId;
+    public String getResult() {
+        return result;
     }
 
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
+    public void setResult(String result) {
+        this.result = result;
     }
 
-    public String getServerIp() {
-        return serverIp;
+    public String getServiceid() {
+        return serviceid;
     }
 
-    public void setServerIp(String serverIp) {
-        this.serverIp = serverIp;
+    public void setServiceid(String serviceid) {
+        this.serviceid = serviceid;
+    }
+
+    public String getServerip() {
+        return serverip;
+    }
+
+    public void setServerip(String serverip) {
+        this.serverip = serverip;
     }
 
     public String getSshPort() {
@@ -31,5 +42,21 @@ public class ServerInfo {
 
     public void setSshPort(String sshPort) {
         this.sshPort = sshPort;
+    }
+
+    public String getMachineusername() {
+        return machineusername;
+    }
+
+    public void setMachineusername(String machineusername) {
+        this.machineusername = machineusername;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

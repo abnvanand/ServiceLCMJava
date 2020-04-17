@@ -21,4 +21,10 @@ public class TopologyDAO {
         session.saveOrUpdate(topology);
         tx.commit();
     }
+
+    public Topology getTopologyInfo(String serviceId) {
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Topology topology = session.get(Topology.class, serviceId);
+        return topology;
+    }
 }

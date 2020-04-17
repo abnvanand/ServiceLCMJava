@@ -27,6 +27,16 @@ public class ServiceSchemaController {
         serviceLCM.startService(serviceSchema);
     }
 
+    @RequestMapping(value = "/service/redeploy", method = RequestMethod.POST)
+    public void redeployService(@RequestBody ServiceSchema serviceSchema) {
+        serviceLCM.redeployService(serviceSchema);
+    }
+
+    @RequestMapping(value = "/service/stop", method = RequestMethod.POST)
+    public void stopService(@RequestBody ServiceSchema serviceSchema) {
+        serviceLCM.stopService(serviceSchema);
+    }
+
     @RequestMapping(value = "/service/update", method = RequestMethod.POST)
     public void allotedServer(@RequestBody ServerInfo serverInfo) {
         serviceLCM.updateServiceWithIpPort(serverInfo);
@@ -36,6 +46,7 @@ public class ServiceSchemaController {
     public void deploymentStatus(@RequestBody DeploymentResponse deploymentResponse) {
         if ("success".equalsIgnoreCase(deploymentResponse.getStatus())) {
             // DELTE service info
+            serviceLCM.updateTopology(deploymentResponse);
             serviceLCM.deleteServiceInfo(deploymentResponse);
         } else {
             // TODO:

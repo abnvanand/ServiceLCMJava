@@ -2,19 +2,33 @@ package com.iiith.slcm.businessentities;
 
 public class DeploymentResponse {
     private String serviceId;
-
-    private String userId;
-
+    private String serviceName;
+    private String username;
     private String status; // success or failure
-
     private String ip;
-
+    // Admin service => forwarded port
+    // User service => Docker daemon port
     private String port;
-
     private String containerId;
+    private String applicationName;
 
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
 
     public DeploymentResponse() {
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
     public String getServiceId() {
@@ -25,13 +39,6 @@ public class DeploymentResponse {
         this.serviceId = serviceId;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getStatus() {
         return status;
@@ -59,6 +66,14 @@ public class DeploymentResponse {
 
     public String getContainerId() {
         return containerId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setContainerId(String containerId) {

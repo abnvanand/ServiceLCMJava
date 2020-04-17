@@ -11,32 +11,22 @@ public class PendingRequests {
     @Id
     @Column(name = "\"serviceId\"")
     private String serviceId;
-
     @Column(name = "\"serviceName\"")
     private String serviceName;
-
-    @Column(name = "\"userId\"")
-    private String userId;
-
+    @Column(name = "\"applicationName\"")
+    private String applicationName;
+    @Column(name = "\"username\"")
+    private String username;
     @Column(name = "\"serverIp\"")
     private String serverIp;
-
     @Column(name = "\"sshPort\"")
     private String sshPort;
+    @Column(name = "\"sshUsername\"")
+    private String sshUsername;
+    @Column(name = "\"sshPassword\"")
+    private String sshPassword;
 
     public PendingRequests() {
-    }
-
-
-    public PendingRequests(String serviceId, String serviceName,
-                           String userId, String serverIp,
-                           String serverPort) {
-        super();
-        this.serviceId = serviceId;
-        this.serviceName = serviceName;
-        this.userId = userId;
-        this.serverIp = serverIp;
-        this.sshPort = serverPort;
     }
 
     public String getServiceId() {
@@ -55,12 +45,20 @@ public class PendingRequests {
         this.serviceName = serviceName;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getApplicationName() {
+        return applicationName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getServerIp() {
@@ -77,5 +75,21 @@ public class PendingRequests {
 
     public void setSshPort(String sshPort) {
         this.sshPort = sshPort;
+    }
+
+    public String getSshUsername() {
+        return sshUsername;
+    }
+
+    public void setSshUsername(String sshUsername) {
+        this.sshUsername = sshUsername;
+    }
+
+    public String getSshPassword() {
+        return sshPassword;
+    }
+
+    public void setSshPassword(String sshPassword) {
+        this.sshPassword = sshPassword;
     }
 }

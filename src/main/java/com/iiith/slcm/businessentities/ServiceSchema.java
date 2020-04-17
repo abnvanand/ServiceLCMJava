@@ -3,11 +3,20 @@ package com.iiith.slcm.businessentities;
 public class ServiceSchema {
 
     private String serviceId;
-    private String serviceName;
-    private String userId;
+    private String servicename;
+    private String applicationname;
+    private String username;
 
 
     public ServiceSchema() {
+    }
+
+    public String getApplicationname() {
+        return applicationname;
+    }
+
+    public void setApplicationname(String applicationname) {
+        this.applicationname = applicationname;
     }
 
     public String getServiceId() {
@@ -18,19 +27,19 @@ public class ServiceSchema {
         this.serviceId = serviceId;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public String getServicename() {
+        return servicename;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setServicename(String servicename) {
+        this.servicename = servicename;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
