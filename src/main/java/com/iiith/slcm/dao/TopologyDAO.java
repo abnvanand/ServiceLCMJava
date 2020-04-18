@@ -48,4 +48,19 @@ public class TopologyDAO {
         tx.commit();
         return topologies;
     }
+
+    public List<Topology> getTopologyForServiceName(String serviceName) {
+        Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        Transaction tx = session.beginTransaction();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Topology> query = builder.createQuery(Topology.class);
+        Root<Topology> root = query.from(Topology.class);
+        query.select(root).where(builder.equal(root.get("serviceName"), serviceName));
+        Query<Topology> q = session.createQuery(query);
+        List<Topology> topologies = q.getResultList();
+
+        tx.commit();
+        return topologies;
+    }
 }

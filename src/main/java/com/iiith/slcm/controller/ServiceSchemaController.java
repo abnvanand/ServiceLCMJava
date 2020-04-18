@@ -59,6 +59,10 @@ public class ServiceSchemaController {
         return serviceLCM.getTopologyForUser(userId);
     }
 
+    @RequestMapping(value = "/service/topology/serviceName/{serviceName}", method = RequestMethod.GET)
+    public List<Topology> getTopologyForServiceName(@PathVariable("serviceName") String serviceName) {
+        return serviceLCM.getTopologyForServiceName(serviceName);
+    }
 
 //    @RequestMapping(value = "/topics/add", method = RequestMethod.POST)
 //    public void addTopic(@RequestBody Service topic) {

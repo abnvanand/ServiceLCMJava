@@ -209,4 +209,8 @@ public class ServiceLCM {
     public List<Topology> getTopologyForUser(String userId) {
         return topologyDAO.getTopologyForUser(userId);
     }
+
+    public List<Topology> getTopologyForServiceName(String serviceName) {
+        return topologyDAO.getTopologyForServiceName(serviceName);
+    }
 }
