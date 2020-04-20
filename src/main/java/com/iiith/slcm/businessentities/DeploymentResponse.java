@@ -12,6 +12,20 @@ public class DeploymentResponse {
     private String containerId;
     private String applicationName;
 
+    @Override
+    public String toString() {
+        return "DeploymentResponse{" +
+                "serviceId='" + serviceId + '\'' +
+                ", serviceName='" + serviceName + '\'' +
+                ", username='" + username + '\'' +
+                ", status='" + status + '\'' +
+                ", ip='" + ip + '\'' +
+                ", port='" + port + '\'' +
+                ", containerId='" + containerId + '\'' +
+                ", applicationName='" + applicationName + '\'' +
+                '}';
+    }
+
     public String getApplicationName() {
         return applicationName;
     }

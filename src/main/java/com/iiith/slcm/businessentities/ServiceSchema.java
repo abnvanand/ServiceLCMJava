@@ -7,6 +7,15 @@ public class ServiceSchema {
     private String applicationname;
     private String username;
 
+    @Override
+    public String toString() {
+        return "ServiceSchema{" +
+                "serviceId='" + serviceId + '\'' +
+                ", servicename='" + servicename + '\'' +
+                ", applicationname='" + applicationname + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
 
     public ServiceSchema() {
     }

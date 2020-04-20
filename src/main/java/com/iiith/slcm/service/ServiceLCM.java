@@ -18,7 +18,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.ByteBuffer;
 import java.util.List;
+import java.util.concurrent.Flow;
 
 @org.springframework.stereotype.Service
 public class ServiceLCM {
@@ -42,8 +44,8 @@ public class ServiceLCM {
                     platformProperties.getServerLCMPort(),
                     serviceSchema.getServiceId());
 
-            sendRequestToServerLCM(URL_ALLOCATE_SERVER);
             serviceLCMDAO.addServiceInfo(pendingRequests);
+            sendRequestToServerLCM(URL_ALLOCATE_SERVER);
         } else {
             topology.setDependencyCount(topology.getDependencyCount() + 1);
             topologyDAO.addTopologyInfo(topology);
@@ -173,8 +175,17 @@ public class ServiceLCM {
     private boolean sendStopContainerRequest(Topology topology, String url) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .header("Content-Type", "application/json")
-                .POST(null)
+                .POST(new HttpRequest.BodyPublisher() {
+                    @Override
+                    public long contentLength() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void subscribe(Flow.Subscriber<? super ByteBuffer> subscriber) {
+
+                    }
+                })
                 .build();
 
         HttpResponse<String> response = null;

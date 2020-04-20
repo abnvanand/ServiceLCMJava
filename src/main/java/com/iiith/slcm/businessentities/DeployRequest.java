@@ -13,6 +13,20 @@ public class DeployRequest {
     public DeployRequest() {
     }
 
+    @Override
+    public String toString() {
+        return "DeployRequest{" +
+                "username='" + username + '\'' +
+                ", applicationname='" + applicationname + '\'' +
+                ", servicename='" + servicename + '\'' +
+                ", serviceid='" + serviceid + '\'' +
+                ", serverip='" + serverip + '\'' +
+                ", sshPort='" + sshPort + '\'' +
+                ", machineusername='" + machineusername + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
     public DeployRequest(String username, String applicationname, String servicename, String serviceid, String serverip, String sshPort, String machineusername, String password) {
         this.username = username;
         this.applicationname = applicationname;
