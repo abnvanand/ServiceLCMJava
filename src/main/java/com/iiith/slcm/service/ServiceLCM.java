@@ -38,7 +38,8 @@ public class ServiceLCM {
         pendingRequests.setApplicationName(serviceSchema.getApplicationname());
 
         Topology topology = topologyDAO.getTopologyInfo(serviceSchema.getServiceId());
-        if (topology == null) {
+        if (topology == null
+                || "stopped".equalsIgnoreCase(topology.getStatus())) {
             String URL_ALLOCATE_SERVER = String.format("http://%s:%s/serverlcm/allocate_server/%s",
                     platformProperties.getServerLCMIp(),
                     platformProperties.getServerLCMPort(),
