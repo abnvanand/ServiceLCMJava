@@ -25,11 +25,13 @@ public class TopologyDAO {
         Transaction tx = session.beginTransaction();
         session.saveOrUpdate(topology);
         tx.commit();
+        session.close();
     }
 
     public Topology getTopologyInfo(String serviceId) {
         Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
         Topology topology = session.get(Topology.class, serviceId);
+        session.close();
         return topology;
     }
 
@@ -46,6 +48,8 @@ public class TopologyDAO {
         List<Topology> topologies = q.getResultList();
 
         tx.commit();
+
+        session.close();
         return topologies;
     }
 
@@ -61,6 +65,7 @@ public class TopologyDAO {
         List<Topology> topologies = q.getResultList();
 
         tx.commit();
+        session.close();
         return topologies;
     }
 }

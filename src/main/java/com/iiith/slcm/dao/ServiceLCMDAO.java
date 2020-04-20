@@ -20,11 +20,13 @@ public class ServiceLCMDAO {
         Transaction tx = session.beginTransaction();
         session.save(pendingRequests);
         tx.commit();
+        session.close();
     }
 
     public PendingRequests getServiceInfo(String serviceId) {
         Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
         PendingRequests pendingRequests = session.get(PendingRequests.class, serviceId);
+        session.close();
         return pendingRequests;
     }
 
@@ -33,6 +35,7 @@ public class ServiceLCMDAO {
         Transaction tx = session.beginTransaction();
         session.update(pendingRequests);
         tx.commit();
+        session.close();
     }
 
     public void deleteServiceInfo(String serviceId) {
@@ -41,5 +44,6 @@ public class ServiceLCMDAO {
         PendingRequests pendingRequests = session.get(PendingRequests.class, serviceId);
         session.delete(pendingRequests);
         tx.commit();
+        session.close();
     }
 }
