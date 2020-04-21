@@ -38,8 +38,7 @@ public class ServiceLCM {
         pendingRequests.setApplicationName(serviceSchema.getApplicationname());
 
         Topology topology = topologyDAO.getTopologyInfo(serviceSchema.getServiceId());
-        if (topology == null
-                || "stopped".equalsIgnoreCase(topology.getStatus())) {
+        if (topology == null) {
             String URL_ALLOCATE_SERVER = String.format("http://%s:%s/serverlcm/allocate_server/%s",
                     platformProperties.getServerLCMIp(),
                     platformProperties.getServerLCMPort(),
@@ -47,6 +46,19 @@ public class ServiceLCM {
 
             serviceLCMDAO.addServiceInfo(pendingRequests);
             sendRequestToServerLCM(URL_ALLOCATE_SERVER);
+        } else if ("stopped".equalsIgnoreCase(topology.getStatus())) {
+            String url = String.format("http://%s:%s/v1.24/containers/%s/start?t=1",
+                    topology.getIp(),
+                    topology.getPort(),
+                    topology.getContainerId());
+            boolean isStarted = sendStartContainerRequest(topology, url);
+            if (isStarted) {
+                topology.setStatus("alive");
+            } else {
+                topology.setStatus("failedToStart");
+            }
+            topologyDAO.addTopologyInfo(topology);
+
         } else {
             topology.setDependencyCount(topology.getDependencyCount() + 1);
             topologyDAO.addTopologyInfo(topology);
@@ -171,6 +183,35 @@ public class ServiceLCM {
                 .thenApply(HttpResponse::body)
                 .thenAccept(System.out::println);
 
+    }
+
+    private boolean sendStartContainerRequest(Topology topology, String url) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .POST(new HttpRequest.BodyPublisher() {
+                    @Override
+                    public long contentLength() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void subscribe(Flow.Subscriber<? super ByteBuffer> subscriber) {
+
+                    }
+                })
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            return false;
+        }
+
+        if (response.statusCode() == 500 || response.statusCode() == 404)
+            return false;
+
+        return true;
     }
 
     private boolean sendStopContainerRequest(Topology topology, String url) {
