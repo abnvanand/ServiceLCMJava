@@ -1,13 +1,23 @@
 package com.iiith.slcm.businessentities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class DeployRequest {
+    @JsonProperty("serviceid")
+    private String serviceId;
+    @JsonProperty("servicename")
+    private String serviceName;
+    @JsonProperty("username")
     private String username;
-    private String applicationname;
-    private String servicename;
-    private String serviceid;
-    private String serverip;
+    @JsonProperty("applicationname")
+    private String applicationName;
+    @JsonProperty("serverip")
+    private String serverIp;
+    @JsonProperty("sshPort")
     private String sshPort;
-    private String machineusername;
+    @JsonProperty("machineusername")
+    private String machineUsername;
+    @JsonProperty("password")
     private String password;
 
     public DeployRequest() {
@@ -17,24 +27,24 @@ public class DeployRequest {
     public String toString() {
         return "DeployRequest{" +
                 "username='" + username + '\'' +
-                ", applicationname='" + applicationname + '\'' +
-                ", servicename='" + servicename + '\'' +
-                ", serviceid='" + serviceid + '\'' +
-                ", serverip='" + serverip + '\'' +
+                ", applicationname='" + applicationName + '\'' +
+                ", servicename='" + serviceName + '\'' +
+                ", serviceid='" + serviceId + '\'' +
+                ", serverip='" + serverIp + '\'' +
                 ", sshPort='" + sshPort + '\'' +
-                ", machineusername='" + machineusername + '\'' +
+                ", machineusername='" + machineUsername + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
 
-    public DeployRequest(String username, String applicationname, String servicename, String serviceid, String serverip, String sshPort, String machineusername, String password) {
+    public DeployRequest(String username, String applicationName, String serviceName, String serviceId, String serverIp, String sshPort, String machineUsername, String password) {
         this.username = username;
-        this.applicationname = applicationname;
-        this.servicename = servicename;
-        this.serviceid = serviceid;
-        this.serverip = serverip;
+        this.applicationName = applicationName;
+        this.serviceName = serviceName;
+        this.serviceId = serviceId;
+        this.serverIp = serverIp;
         this.sshPort = sshPort;
-        this.machineusername = machineusername;
+        this.machineUsername = machineUsername;
         this.password = password;
     }
 
@@ -47,36 +57,36 @@ public class DeployRequest {
         this.username = username;
     }
 
-    public String getApplicationname() {
-        return applicationname;
+    public String getApplicationName() {
+        return applicationName;
     }
 
-    public void setApplicationname(String applicationname) {
-        this.applicationname = applicationname;
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
     }
 
-    public String getServicename() {
-        return servicename;
+    public String getServiceName() {
+        return serviceName;
     }
 
-    public void setServicename(String servicename) {
-        this.servicename = servicename;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
-    public String getServiceid() {
-        return serviceid;
+    public String getServiceId() {
+        return serviceId;
     }
 
-    public void setServiceid(String serviceid) {
-        this.serviceid = serviceid;
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 
-    public String getServerip() {
-        return serverip;
+    public String getServerIp() {
+        return serverIp;
     }
 
-    public void setServerip(String serverip) {
-        this.serverip = serverip;
+    public void setServerIp(String serverIp) {
+        this.serverIp = serverIp;
     }
 
     public String getSshPort() {
@@ -87,12 +97,12 @@ public class DeployRequest {
         this.sshPort = sshPort;
     }
 
-    public String getMachineusername() {
-        return machineusername;
+    public String getMachineUsername() {
+        return machineUsername;
     }
 
-    public void setMachineusername(String machineusername) {
-        this.machineusername = machineusername;
+    public void setMachineUsername(String machineUsername) {
+        this.machineUsername = machineUsername;
     }
 
     public String getPassword() {

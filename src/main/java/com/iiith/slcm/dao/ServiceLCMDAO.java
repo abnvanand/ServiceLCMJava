@@ -38,7 +38,7 @@ public class ServiceLCMDAO {
         session.close();
     }
 
-    public void deleteServiceInfo(String serviceId) {
+    public void deletePendingRequest(String serviceId) {
         Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
         Transaction tx = session.beginTransaction();
         PendingRequests pendingRequests = session.get(PendingRequests.class, serviceId);

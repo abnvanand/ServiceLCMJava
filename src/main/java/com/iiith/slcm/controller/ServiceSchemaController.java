@@ -1,8 +1,8 @@
 package com.iiith.slcm.controller;
 
-import com.iiith.slcm.businessentities.DeploymentResponse;
-import com.iiith.slcm.businessentities.ServerInfo;
-import com.iiith.slcm.businessentities.ServiceSchema;
+import com.iiith.slcm.businessentities.DeploymentInfoDTO;
+import com.iiith.slcm.businessentities.ServerInfoDTO;
+import com.iiith.slcm.businessentities.ServiceInfoDTO;
 import com.iiith.slcm.dataentities.Topology;
 import com.iiith.slcm.service.ServiceLCM;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,43 +16,39 @@ public class ServiceSchemaController {
 
     @Autowired
     private ServiceLCM serviceLCM;
-		
-		/*@RequestMapping("/topics")
-		public List<Topic> getAllTopics(){
-			return topicService.getAllTopics();
-		}*/
 
     @RequestMapping(value = "/service/start", method = RequestMethod.POST)
-    public void startService(@RequestBody ServiceSchema serviceSchema) {
-        System.out.println("Received Request: /service/start " + serviceSchema);
-        serviceLCM.startService(serviceSchema);
-    }
-
-    @RequestMapping(value = "/service/redeploy", method = RequestMethod.POST)
-    public void redeployService(@RequestBody ServiceSchema serviceSchema) {
-        System.out.println("Received Request: /service/redeploy " + serviceSchema);
-        serviceLCM.redeployService(serviceSchema);
+    public void startService(@RequestBody ServiceInfoDTO serviceInfoDTO) {
+        System.out.println("Received Request: /service/start " + serviceInfoDTO);
+        serviceLCM.startService(serviceInfoDTO);
     }
 
     @RequestMapping(value = "/service/stop", method = RequestMethod.POST)
-    public void stopService(@RequestBody ServiceSchema serviceSchema) {
-        System.out.println("Received Request: /service/redeploy " + serviceSchema);
-        serviceLCM.stopService(serviceSchema);
+    public void stopService(@RequestBody ServiceInfoDTO serviceInfoDTO) {
+        System.out.println("Received Request: /service/redeploy " + serviceInfoDTO);
+        serviceLCM.stopService(serviceInfoDTO);
     }
 
+    @RequestMapping(value = "/service/redeploy", method = RequestMethod.POST)
+    public void redeployService(@RequestBody ServiceInfoDTO serviceInfoDTO) {
+        System.out.println("Received Request: /service/redeploy " + serviceInfoDTO);
+        serviceLCM.redeployService(serviceInfoDTO);
+    }
+
+
     @RequestMapping(value = "/service/update", method = RequestMethod.POST)
-    public void allotedServer(@RequestBody ServerInfo serverInfo) {
-        System.out.println("Received Request: /service/redeploy " + serverInfo);
-        serviceLCM.updateServiceWithIpPort(serverInfo);
+    public void allotedServer(@RequestBody ServerInfoDTO serverInfoDTO) {
+        System.out.println("Received Request: /service/redeploy " + serverInfoDTO);
+        serviceLCM.updateServiceWithIpPort(serverInfoDTO);
     }
 
     @RequestMapping(value = "/service/deploymentStatus", method = RequestMethod.POST)
-    public void deploymentStatus(@RequestBody DeploymentResponse deploymentResponse) {
-        System.out.println("Received Request: /service/redeploy " + deploymentResponse);
-        if ("success".equalsIgnoreCase(deploymentResponse.getStatus())) {
-            // DELTE service info
-            serviceLCM.updateTopology(deploymentResponse);
-            serviceLCM.deleteServiceInfo(deploymentResponse);
+    public void deploymentStatus(@RequestBody DeploymentInfoDTO deploymentInfoDTO) {
+        System.out.println("Received Request: /service/redeploy " + deploymentInfoDTO);
+        if ("success".equalsIgnoreCase(deploymentInfoDTO.getStatus())) {
+            // DELETE service info
+            serviceLCM.updateServiceDeploymentStatus(deploymentInfoDTO);
+            serviceLCM.deletePendingRequest(deploymentInfoDTO);
         } else {
             // TODO:
         }

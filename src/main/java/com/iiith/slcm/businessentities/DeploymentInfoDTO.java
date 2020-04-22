@@ -1,15 +1,25 @@
 package com.iiith.slcm.businessentities;
 
-public class DeploymentResponse {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class DeploymentInfoDTO {
+    @JsonProperty("serviceId")
     private String serviceId;
+    @JsonProperty("serviceName")
     private String serviceName;
+    @JsonProperty("username")
     private String username;
+    @JsonProperty("status")
     private String status; // success or failure
+    @JsonProperty("ip")
     private String ip;
     // Admin service => forwarded port
     // User service => Docker daemon port
+    @JsonProperty("port")
     private String port;
+    @JsonProperty("containerId")
     private String containerId;
+    @JsonProperty("applicationName")
     private String applicationName;
 
     @Override
@@ -34,7 +44,7 @@ public class DeploymentResponse {
         this.applicationName = applicationName;
     }
 
-    public DeploymentResponse() {
+    public DeploymentInfoDTO() {
     }
 
     public String getServiceName() {
