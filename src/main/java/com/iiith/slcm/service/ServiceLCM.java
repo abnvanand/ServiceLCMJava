@@ -170,16 +170,16 @@ public class ServiceLCM {
     }
 
     public void updateServiceDeploymentStatus(DeploymentInfoDTO deploymentInfoDTO) {
-        Topology topology = new Topology();
+        Topology topology = topologyDAO.getTopologyInfo(deploymentInfoDTO.getServiceId());
+        if(topology==null && !"admin".equalsIgnoreCase(deploymentInfoDTO.getUsername())) {
+        	topology = new Topology();
+        	topology.setPort(deploymentInfoDTO.getPort());
+        }
         topology.setServiceId(deploymentInfoDTO.getServiceId());
         topology.setServiceName(deploymentInfoDTO.getServiceName());
         topology.setUsername(deploymentInfoDTO.getUsername());
         topology.setContainerId(deploymentInfoDTO.getContainerId());
         topology.setIp(deploymentInfoDTO.getIp());
-        if (!"admin".equals(deploymentInfoDTO.getUsername())) {
-            topology.setPort(deploymentInfoDTO.getPort());
-        }
-        
         // whenever a service is started we consider it has no other dependencies
         topology.setDependencyCount(0);
         // FIXME: Ask for json value coming from deployment manager
