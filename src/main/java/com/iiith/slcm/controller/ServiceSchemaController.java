@@ -57,29 +57,13 @@ public class ServiceSchemaController {
 
     @RequestMapping(value = "/service/topology/{userId}", method = RequestMethod.GET)
     public List<Topology> getTopology(@PathVariable("userId") String userId) {
-        System.out.println("Received Request: /service/topology/{userId} " + userId);
+        //System.out.println("Received Request: /service/topology/{userId} " + userId);
         return serviceLCM.getTopologyForUser(userId);
     }
 
     @RequestMapping(value = "/service/topology/serviceName/{serviceName}", method = RequestMethod.GET)
     public List<Topology> getTopologyForServiceName(@PathVariable("serviceName") String serviceName) {
-        System.out.println("Received Request: /service/topology/serviceName/{serviceName} " + serviceName);
+        //System.out.println("Received Request: /service/topology/serviceName/{serviceName} " + serviceName);
         return serviceLCM.getTopologyForServiceName(serviceName);
     }
-
-//    @RequestMapping(value = "/topics/add", method = RequestMethod.POST)
-//    public void addTopic(@RequestBody Service topic) {
-//        serviceLCM.addTopic(topic);
-//
-//    }
-		
-		/*@RequestMapping(method=RequestMethod.PUT, value="/topics/{id}")
-		public void updateTopic(@RequestBody Topic topic, @PathVariable String id){
-			topicService.updateTopic(topic, id);
-		}
-		
-		@RequestMapping(method=RequestMethod.DELETE, value="/topics/{id}")
-		public void deleteTopic(@PathVariable String id){
-			topicService.deleteTopic(id);
-		}*/
 }
